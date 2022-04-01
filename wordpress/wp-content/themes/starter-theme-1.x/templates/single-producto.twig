@@ -14,7 +14,7 @@
 		<div class="flex flex-col justify-start">
 			<div class="flex flex-col w-full object-cover h-5/6 justify-items-start border rounded-lg overflow-hidden"
 				style="min-heigth:320px">
-				<img class="w-full h-full object-content" src="{{post.imagen}}" alt='nike shoes' >
+				<img class="w-full h-full object-content" src="{{post.get_field('img')}}" alt='nike shoes' >
             </div>
 			</div>
 			<div class="flex flex-col">
@@ -36,26 +36,29 @@
 		</div>
 </main>
 
-{% for r in post.relacionados %}
-
-{{function('var_dump', r.28)}}
-
 	 <div class="bg-white">
-  <div class="max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+  <div class="max-w-2xl py-10 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8">
+  <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Productos relacionados</h2>
 
     <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+
+{% for r in relacionados %}
+
+ {# {{function('var_dump', r)}}  #}
+
+
     
 
       <div class="group relative">
         <div  class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-        <img src="{{r.imagen}}" alt="Front of men&#039;s Basic Tee in black."  class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+        <img src="{{Image(r.img).src}}" alt="Front of men&#039;s Basic Tee in black."  class="w-full h-full object-center object-cover lg:w-full lg:h-full">
         </div>
         <div class="mt-4 flex justify-between">
           <div>
             <h3 class="text-sm text-gray-700">
-              <a href="{{r.slug}}">
+              <a href="{{r.post_name}}">
                 <span aria-hidden="true" class="absolute inset-0"></span>
-                {{r.title}}
+                {{r.post_title}}
               </a>
             </h3>
             <p class="mt-1 text-sm text-gray-500">{{r.descripcion}}</p>
@@ -65,14 +68,14 @@
       </div>
       
 
-      <!-- More products... -->
-    </div>
-  </div>
-</div>
+ 
 
 {% endfor %}
 
-
+     <!-- More products... -->
+    </div>
+  </div>
+</div>
     
 {% endblock %}
 
